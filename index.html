@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiết Kiệm Điện - THPT Việt Đức | Team 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Thanh điều hướng Header -->
+    <header>
+        <div class="logo">🌱 Green Việt Đức</div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">☰</button>
+        <nav id="nav-menu">
+            <a href="#thuc-trang">Thực Trạng</a>
+            <a href="#danh-sach-bao-cao">Lịch Sử Báo Cáo</a>
+            <a href="admin.html" class="nav-admin-btn">🔒 Dành cho Giáo Viên</a>
+        </nav>
+    </header>
+
+    <!-- Banner chính -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>GIẢI PHÁP TỐI ƯU NĂNG LƯỢNG HỌC ĐƯỜNG</h1>
+            <p>Xây dựng ý thức tiết kiệm điện cho học sinh Trường THPT Việt Đức thông qua Trợ lý AI sáng tạo</p>
+            <a href="#danh-sach-bao-cao" class="btn-primary">Xem Lịch Sử Báo Cáo</a>
+        </div>
+    </section>
+
+    <!-- Section Thực trạng -->
+    <section id="thuc-trang" class="content-section">
+        <h2 class="section-title">Thực Trạng Tại THPT Việt Đức</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Lãng phí điện năng</h3>
+                <p>Học sinh khi ra chơi hoặc chuyển phòng học thường quên tắt hệ thống quạt trần, đèn chiếu sáng và điều hòa không khí.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Khó khăn quản lý</h3>
+                <p>Việc theo dõi, chấm điểm thi đua tiết kiệm điện giữa các chi đoàn còn thủ công, tốn thời gian và thiếu dữ liệu chính xác.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Lịch sử báo cáo cho Học sinh xem -->
+    <section id="danh-sach-bao-cao" class="content-section">
+        <h2 class="section-title">📊 Lịch Sử Báo Cáo Vi Phạm & Thi Đua</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">Danh sách phòng học vi phạm (Nhấp vào từng thẻ để xem chi tiết):</p>
+        
+        <div id="list-bao-cao-container" class="report-list">
+            <!-- Dữ liệu JS tự động hiển thị tại đây -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Dự án Ban IT - VDIT Gen 7 | Thực hiện bởi Team 1 THPT Việt Đức</p>
+    </footer>
+
+    <!-- JavaScript Trang Học Sinh -->
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        // Hiển thị danh sách Thẻ báo cáo từ LocalStorage
+        function hienThiDanhSachBaoCao() {
+            const container = document.getElementById('list-bao-cao-container');
+            container.innerHTML = '';
+
+            let dsBaoCao = JSON.parse(localStorage.getItem('dsBaoCaoElec')) || [];
+
+            if (dsBaoCao.length === 0) {
+                container.innerHTML = '<p class="empty-msg">Chưa có dữ liệu báo cáo vi phạm nào được ghi nhận.</p>';
+                return;
+            }
+
+            dsBaoCao.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'report-card';
+
+                card.innerHTML = `
+                    <div class="report-header" onclick="toggleDetail(${index})">
+                        <div class="report-title">
+                            🏫 <strong>${item.tenPhong || 'Phòng Học Không Tên'}</strong> 
+                            <span class="report-time">⏰ ${item.thoiGian || 'Chưa rõ thời gian'}</span>
+                        </div>
+                        <button class="btn-arrow" id="arrow-${index}">▼</button>
+                    </div>
+                    <div class="report-detail" id="detail-${index}">
+                        <div class="detail-content">
+                            <p><strong>⚡ Thiết bị quên tắt:</strong> ${item.dieuHoaQuenTat || 0} Điều hòa, ${item.quatQuenTat || 0} Quạt/Đèn</p>
+                            <p><strong>📉 Điểm thi đua trừ:</strong> <span class="badge-red">-${item.diemTru || 0} điểm</span></p>
+                            <p><strong>💰 Ước tính lãng phí:</strong> <span class="badge-green">${item.langPhiUocTinh || '0 VNĐ'}</span></p>
+                            <p><strong>📝 Ghi chú từ AI / GV:</strong> ${item.ghiChu || 'Không có ghi chú'}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleDetail(index) {
+            const detailEl = document.getElementById(`detail-${index}`);
+            const arrowEl = document.getElementById(`arrow-${index}`);
+
+            if (detailEl.style.display === 'block') {
+                detailEl.style.display = 'none';
+                arrowEl.innerText = '▼';
+            } else {
+                detailEl.style.display = 'block';
+                arrowEl.innerText = '▲';
+            }
+        }
+
+        window.onload = hienThiDanhSachBaoCao;
+    </script>
+</body>
+</html>
+// --- KÍCH HOẠT HIỆU ỨNG CHUYỂN ĐỘNG KHI CUỘN TRANG (SCROLL REVEAL) ---
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    const windowHeight = window.innerHeight;
+
+    reveals.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 100; // Khoảng cách tới viền dưới màn hình để bắt đầu hiện
+
+        if (elementTop < windowHeight - revealPoint) {
+            element.classList.add('active');
+        }
+    });
+}
+
+// Bắt sự kiện cuộn trang & kích hoạt khi load lần đầu
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
