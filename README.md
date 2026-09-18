@@ -1,6 +1,7 @@
 ## Thay đổi
 * Chuyển từ dùng ```localStorage``` sang ``file system access api``
-* Cho lịch sử báo cáo vào JSON viewer và làm nó to hơn
+* Giữ nguyên lịch sử báo cáo trong trang HS
+* Cho lịch sử báo cáo vào trang giáo viên và làm nó to hơn
 
 ## Hướng dẫn dùng
 ### Giáo viên:
