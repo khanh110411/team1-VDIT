@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cổng Quản Lý Báo Cáo - THPT Việt Đức</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_JSON_manager.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -41,8 +42,48 @@
 
             <!-- 2. NÚT XÓA TOÀN BỘ DỮ LIỆU BÁO CÁO -->
             <button id="btn-xoa-tat-ca" class="btn-danger">
-                🗑️ Xóa Phông / Xóa Toàn Bộ Lịch Sử Báo Cáo
+                🗑️ Xóa Toàn Bộ Lịch Sử Báo Cáo
             </button>
+        </div>
+    </section>
+
+
+    <!-- Trình quản lí file JSON -->
+    <section id="danh-sach-bao-cao" class="content-section-big">
+        <h2 class="section-title">📊 Lịch Sử Báo Cáo Vi Phạm & Thi Đua</h2>
+        <div class="wrapper">
+            <div class="toolbar">
+                <button id="chooseFolder" class="btn-primary">📁 Chọn thư mục</button>
+                <button id="newFile" class="btn-primary">➕ File mới</button>
+                <button id="saveFile" class="btn-primary">💾 Lưu</button>
+                <button id="deleteFile" class="btn-primary">🗑️ Xóa</button>
+            </div>
+            <div class="layout">
+                <aside>
+                    <p style="text-align: center; color: #666">Danh sách phòng học vi phạm</p>
+                    <p style="text-align: center; color: #666; margin-bottom: 30px;">(Nhấp vào từng thẻ để xem chi tiết):</p>
+                    
+                    <div id="list-bao-cao-container" class="report-list">
+                        <!-- Dữ liệu JS tự động hiển thị tại đây -->
+                    </div>
+                </aside>
+
+                <main>
+                    <div class="fileName">
+                        <label for="fileName">Tên file:</label>
+                        <input id="fileName" type="text" placeholder="Tên lớp. Ví dụ: 10A6">
+                    </div>
+                    <p style="margin-bottom: 10px;"></p>
+                    <textarea
+                        id="jsonInput"
+                        placeholder="Dán JSON vào đây..."
+                        spellcheck="false"
+                    ></textarea>
+
+                    <p id="status"></p>
+                </main>
+
+            </div>
         </div>
     </section>
 
@@ -52,22 +93,7 @@
     </footer>
 
     <!-- JavaScript Trang Giáo Viên -->
-    <script>
-        // Link PartyRock dành riêng cho Giáo viên
-        const partyRockURL = 'https://partyrock.aws/u/khanh1104/M7J5-3r33/?fbclid=IwY2xjawUWRGVwZG9mA2V4dG4DYWVtAjExAHNydGMGYXBwX2lkATAAAR4mlSMbSV41pAqM7hYG9z1q9tJuk6ieldZUkOd2y4SQcEm78Rj47frk1XJu4g_aem_cLWWmZDa9KIQyrxz823vow';
-
-        // Xử lý sự kiện mở link PartyRock
-        document.getElementById('btn-mo-partyrock-admin').addEventListener('click', function() {
-            window.open(partyRockURL, '_blank');
-        });
-
-        // Xử lý sự kiện Xóa toàn bộ dữ liệu báo cáo
-        document.getElementById('btn-xoa-tat-ca').addEventListener('click', function() {
-            if (confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử báo cáo hiện tại không?')) {
-                localStorage.removeItem('dsBaoCaoElec');
-                alert('🗑️ Đã xóa sạch dữ liệu báo cáo!');
-            }
-        });
-    </script>
+    <script src="effect.js"></script>
+    <script src="json_manager.js"></script>
 </body>
 </html>

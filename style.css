@@ -74,7 +74,7 @@ nav a:hover {
 
 /* --- BANNER CHÍNH --- */
 .banner {
-    background: linear-gradient(135deg, rgba(27, 94, 32, 0.9), rgba(46, 125, 50, 0.8)), url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=80');
+    background: linear-gradient(135deg, rgba(27, 94, 32, 0.75), rgba(46, 125, 50, 0.65)), url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
     background-position: center;
     color: white;
@@ -117,6 +117,12 @@ nav a:hover {
 .content-section {
     padding: 60px 5%;
     max-width: 1000px;
+    margin: 0 auto;
+}
+
+.content-section-big {
+    padding: 60px 5%;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
@@ -210,7 +216,7 @@ nav a:hover {
     background: none;
     border: none;
     font-size: 16px;
-    color: #2e7d32;
+    color: #5c5c5c;
     cursor: pointer;
 }
 
