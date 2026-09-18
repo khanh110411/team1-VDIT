@@ -1,4 +1,5 @@
 ## Thay đổi
+* Cái patch 1 là bản cũ. Đây là patch 2
 * Chuyển từ dùng ```localStorage``` sang ``file system access api``
 * Giữ nguyên lịch sử báo cáo trong trang HS
 * Cho lịch sử báo cáo vào trang giáo viên và làm nó to hơn
