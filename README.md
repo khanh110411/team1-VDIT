@@ -8,5 +8,7 @@
 3. Lưu/Xóa
 
 ## Note:
-* *```html <aside>``` trên điện thoại không ổn nhưng sẽ sửa sau*
+* *```html
+* <aside>
+  ```trên điện thoại không ổn nhưng sẽ sửa sau*
 * *Cách đọc JSON cũ trong ```HIỂN THỊ DANH SÁCH BÁO CÁO``` không tương thích với định dạng mới*
